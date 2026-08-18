@@ -15,7 +15,7 @@ MAWD Challenge용 웹서비스 MVP입니다. **이미 유명한 핫플이 아니
 ### 가장 간단한 방법
 <p align="center">
   <a href="https://minggu0321.github.io/mawdhackerton/"><strong>Live Demo</strong></a> ·
-  <a href="docs/NEXT_SPOT_%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pptx"><strong>Presentation</strong></a>
+  <a href="outputs/next_spot_pitch.pptx"><strong>Presentation</strong></a>
 </p>
 
 `index.html`을 브라우저에서 엽니다.
@@ -137,7 +137,7 @@ NEXT-SPOT/
 
 서비스 문제정의, 데이터 기반 해결방법, 기대효과와 확장 방향을 정리한 발표자료입니다.
 
-- [NEXT SPOT 발표자료 다운로드](docs/NEXT_SPOT_%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pptx)
+- 📊 [Presentation deck](outputs/next_spot_pitch.pptx)
 
 발표자료의 화면은 해커톤 발표용이며, 서비스의 지역 후보·점수·신호는 현재 개발용 mock 데이터입니다.
 
@@ -211,7 +211,7 @@ python scripts/inspect_ajeong_data.py "data/ajeong_raw.xlsx"
 
 UI에 필요한 최소 필드 형식은 아래와 같습니다.
 - 🌐 [Live Demo](https://minggu0321.github.io/mawdhackerton/)
-- 📊 [Presentation deck](docs/NEXT_SPOT_%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pptx)
+- 📊 [Presentation deck](outputs/next_spot_pitch.pptx)
 - 🎨 [Figma screens](https://www.figma.com/design/6S5ZblMCPp662BgCGriXT2/Untitled)
 
 ```js
