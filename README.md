@@ -8,7 +8,7 @@ MAWD Challenge용 웹서비스 MVP입니다. **이미 유명한 핫플이 아니
 
 - HTML + CSS + JavaScript ES modules
 - 프레임워크·빌드 의존성 없음
-- 이유: Node.js 설치나 패키지 설치 없이 바로 실행되어 5시간 MVP에 안정적입니다.
+
 
 ## 실행 방법
 
