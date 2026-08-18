@@ -98,7 +98,6 @@ NEXT_SPOT_SCORE = 변화 점수 × 0.5 + 발견 점수 × 0.3 + 방문 적합 �
 - HTML / CSS / JavaScript ES modules
 - 프레임워크·빌드 의존성 없는 정적 웹앱
 - Python HTTP server 또는 GitHub Pages
-- 5시간 해커톤에 맞춘 최소 의존성 구조
 
 Node.js가 있는 환경에서는 아래 명령으로 10개 mock 지역의 점수 범위와 설명 문구 유무를 확인할 수 있습니다.
 ## Run locally
