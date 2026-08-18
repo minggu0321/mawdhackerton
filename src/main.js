@@ -1,4 +1,6 @@
 import { getDataSourceMeta, getNeighborhoods, getSituationRecommendations } from './data/neighborhoodRepository.js';
+import { seoulHousingSignals } from './data/seoulHousingSignals.js';
+import { seoulBusinessSignals, SEOUL_BUSINESS_SIGNAL_META } from './data/seoulBusinessSignals.js';
 
 const app = document.querySelector('#app');
 const neighborhoods = getNeighborhoods();
@@ -91,6 +93,9 @@ const openDetail = (id) => {
   const neighborhood = neighborhoods.find((item) => item.id === id);
   if (!neighborhood) return;
   const { detail } = neighborhood;
+  const housing = seoulHousingSignals[neighborhood.district];
+  const businessActivity = seoulBusinessSignals[neighborhood.district];
+  const externalStats = housing || businessActivity !== undefined;
   detailContent.innerHTML = `
     <button class="dialog-close" type="button" aria-label="상세 패널 닫기">×</button>
     <div class="detail-top"><div><p class="eyebrow">NEIGHBORHOOD SIGNAL DETAIL</p><h2 id="detail-title">${neighborhood.name}</h2><p>${neighborhood.district} · 기준월 ${neighborhood.referenceMonth} · <b>개발용 mock 분석</b></p></div><div class="detail-score"><span>NEXT SPOT SCORE</span><strong>${neighborhood.score}</strong><small>설명형 휴리스틱</small></div></div>
@@ -98,6 +103,7 @@ const openDetail = (id) => {
     <section class="detail-section"><div class="detail-heading"><div><p class="eyebrow">CHANGE SIGNALS</p><h3>왜 앞으로 뜰 것으로 보나요?</h3></div><span class="mock-chip">개발용 mock + 서울시 외부 통계</span></div><div class="signal-card-grid">${detail.signalCards.map((signal) => `<article class="detail-signal-card ${signal.tone}"><span>${signal.label}</span><strong>${signal.value}</strong><small>${signal.note}</small></article>`).join('')}</div></section>
     <section class="detail-section trend-section"><div class="detail-heading"><div><p class="eyebrow">3-MONTH MOMENTUM</p><h3>최근 3개월 변화</h3></div><span>변화 신호 지수</span></div>${renderBarChart(detail.monthlyMomentum)}<p class="chart-note">※ 5~7월 추이는 현재 mock 데이터의 비교값을 기반으로 만든 개발용 시각화입니다.</p></section>
     <section class="detail-section transparent-section"><div class="detail-heading"><div><p class="eyebrow">OPEN EVIDENCE</p><h3>AI가 아니라 데이터로 보는 이 동네의 변화</h3></div></div><div class="evidence-list"><div><span>신규 인터넷 설치 신호</span><b>${detail.signalCards[0].value}</b></div><div><span>신규 점포 순증</span><b>${detail.signalCards[2].value}</b></div><div><span>생활인구 변화</span><b>${detail.signalCards[3].value}</b></div><div><span>문화공간 변화</span><b>${detail.signalCards[4].value}</b></div><div><span>현재 혼잡도</span><b>${neighborhood.crowdingScore}/100</b></div></div><p class="evidence-copy">NEXT SPOT은 머신러닝 예측이 아닙니다. 인터넷 설치·이동·상권·생활인구·문화공간·혼잡도 신호를 0~100으로 정규화해, 고정 가중치로 계산한 MVP용 휴리스틱입니다.</p></section>
+    <section class="detail-section external-data-section"><div class="detail-heading"><div><p class="eyebrow">SEOUL OPEN DATA</p><h3>서울시 통계로 확인한 외부 신호</h3></div><span class="source-chip">서울부동산정보광장</span></div><div class="external-data-grid"><article><span>민간 미분양</span><strong>${housing ? `${housing.privateUnsoldUnits}호` : '자료 없음'}</strong><small>기준일 ${housing?.referenceDate ?? '2026-06-30'}</small></article><article><span>상업·업무용 거래 활동</span><strong>${businessActivity !== undefined ? `${businessActivity}건` : '자료 없음'}</strong><small>${SEOUL_BUSINESS_SIGNAL_META.referencePeriod} · ${SEOUL_BUSINESS_SIGNAL_META.unit}</small></article></div><p class="evidence-copy">이 값은 지역 변화를 해석하기 위한 외부 참고 통계입니다. NEXT SPOT 점수를 단독으로 결정하지 않으며, 실제 미래 상권이나 거래량을 보장하지 않습니다.</p></section>
     <section class="visit-recommendation"><div><span>현재 혼잡도</span><strong>${neighborhood.crowdingLabel} · ${neighborhood.crowdingScore}/100</strong></div><div><span>추천 방문 시간</span><strong>${neighborhood.recommendedVisitTime}</strong></div><div><span>추천 이유</span><strong>${neighborhood.signals[0]}</strong></div></section>
     <p class="uncertainty-note">예측에는 불확실성이 있습니다. 현재 표시된 정보는 실제 데이터가 아닌 화면·분석 로직 검증용 mock 데이터입니다.</p>`;
   detailContent.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
