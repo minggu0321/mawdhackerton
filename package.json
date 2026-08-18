@@ -1,0 +1,8 @@
+{
+  "name": "next-spot-mvp",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check:data": "node scripts/check-data.js"
+  }
+}
