@@ -213,7 +213,7 @@ python scripts/inspect_ajeong_data.py "data/ajeong_raw.xlsx"
 UI에 필요한 최소 필드 형식은 아래와 같습니다.
 - 🌐 [Live Demo](https://minggu0321.github.io/mawdhackerton/)
 - 📊 [Presentation deck](outputs/%EB%84%A5%EC%8A%A4%ED%8A%B8%EC%8A%A4%ED%8C%9F%20%ED%94%BC%ED%94%BC%ED%8B%B0.pptx)
-- 🎨 [Figma screens](https://www.figma.com/design/6S5ZblMCPp662BgCGriXT2/Untitled)
+  
 
 ```js
 {
