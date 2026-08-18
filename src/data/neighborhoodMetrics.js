@@ -4,6 +4,9 @@
  * 모든 feature는 0~100으로 정규화한 뒤, 고정 가중치로 합산합니다.
  */
 
+import { seoulHousingSignals } from './seoulHousingSignals.js';
+import { seoulBusinessSignals, SEOUL_BUSINESS_SIGNAL_META } from './seoulBusinessSignals.js';
+
 const clamp = (value, min = 0, max = 100) => Math.max(min, Math.min(max, value));
 
 export const normalizeTo100 = (value, min, max) => {
@@ -51,6 +54,18 @@ function buildPublicChangeFeatures(raw) {
   const culturalSpaceGrowth = raw.culturalSpaces[0] - raw.culturalSpaces[1];
   const livingPopulationGrowthRate = percentChange(...raw.livingPopulationIndex);
 
+  const housing = seoulHousingSignals[raw.district];
+  const housingFeatures = housing
+    ? [feature('private-unsold-risk', '민간 미분양 리스크', housing.privateUnsoldUnits, 100 - normalizeTo100(housing.privateUnsoldUnits, 0, 300), 0.08, '서울시 민간 미분양이 낮아 주거 리스크가 상대적으로 낮습니다.')]
+    : [];
+
+  const transactionActivity = Number.isFinite(raw.commercialTransactionActivity)
+    ? raw.commercialTransactionActivity
+    : seoulBusinessSignals[raw.district];
+  const transactionFeatures = Number.isFinite(transactionActivity)
+    ? [feature('commercial-transaction-activity', '상업·업무용 거래활동', transactionActivity, normalizeTo100(transactionActivity, 0, 332), 0.08, `서울시 ${SEOUL_BUSINESS_SIGNAL_META.referencePeriod} 상업·업무용 거래활동이 확인됩니다.`)]
+    : [];
+
   return [
     feature('population-growth', '인구 변화', populationGrowthRate, normalizeTo100(populationGrowthRate, -1, 2.5), 0.1, '인구가 최근 증가했습니다.'),
     feature('household-growth', '세대 변화', householdGrowthRate, normalizeTo100(householdGrowthRate, -1, 3), 0.1, '세대 수가 최근 증가했습니다.'),
@@ -58,6 +73,8 @@ function buildPublicChangeFeatures(raw) {
     feature('commercial-net-gain', '상권 순증', commercialNetGain, normalizeTo100(commercialNetGain, -5, 15), 0.18, '최근 신규 점포가 빠르게 증가하고 있습니다.'),
     feature('culture-growth', '문화공간 증가', culturalSpaceGrowth, normalizeTo100(culturalSpaceGrowth, 0, 5), 0.1, '문화공간이 최근 늘고 있습니다.'),
     feature('living-population-growth', '생활인구 증가', livingPopulationGrowthRate, normalizeTo100(livingPopulationGrowthRate, -5, 30), 0.14, '생활인구가 최근 3개월 동안 증가했습니다.'),
+    ...housingFeatures,
+    ...transactionFeatures,
   ];
 }
 

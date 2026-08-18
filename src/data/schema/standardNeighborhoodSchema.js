@@ -7,6 +7,7 @@ export const STANDARD_NEIGHBORHOOD_FIELDS = [
   'population', 'households', 'moveIns', 'newCafes', 'newRestaurants',
   'closures', 'culturalSpaces', 'livingPopulationIndex',
   'currentCrowdingScore', 'businessDiversityScore',
+  'commercialTransactionActivity', 'commercialTransactionReferencePeriod',
 ];
 
 export const REQUIRED_SCORE_FIELDS = ['name', 'referenceMonth'];
