@@ -62,3 +62,4 @@ body{background:#f5f7fb!important}
 .recommendation-top .crowding-badge,.card-topline .crowding-badge{background:#eef4ff!important;color:#3567a2!important}
 .mini-result-map:after{background:#8cc8f5!important}
 .search-result{background:#fff!important;border-color:#e2e7ee!important}.search-result strong{color:#0064ff!important}.search-result small{color:#6f7f91!important}
+.mini-result-map:before,.mini-result-map:after{display:none!important}.mini-map-svg{position:absolute;inset:0;width:100%;height:100%;display:block}.mini-map-label{position:absolute;z-index:4;top:12px;left:12px}.mini-marker{position:absolute;z-index:5;transform:translate(-50%,-50%);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;padding:0}.mini-marker span{position:absolute;top:36px;white-space:nowrap;font-size:.65rem;font-weight:800}
