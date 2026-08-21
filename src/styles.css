@@ -59,3 +59,5 @@ body{background:#f5f7fb!important}
 .legend-dot,.legend-dot.high{background:#0064ff!important;box-shadow:0 0 0 4px #0064ff25!important}
 .card-score strong,.recommendation-name strong{color:#0064ff!important}.change-line{color:#1764cf!important}.card-detail-link{color:#1764cf!important}
 .recommendation-top .crowding-badge,.card-topline .crowding-badge{background:#eef4ff!important;color:#3567a2!important}
+.mini-result-map:after{background:#8cc8f5!important}
+.search-result{background:#fff!important;border-color:#e2e7ee!important}.search-result strong{color:#0064ff!important}.search-result small{color:#6f7f91!important}
