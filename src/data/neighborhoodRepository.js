@@ -1,4 +1,4 @@
-import { MockDataProvider } from './providers/mockDataProvider.js';
+import { RealDataProvider } from './providers/realDataProvider.js';
 import { calculateNeighborhoodMetrics } from './neighborhoodMetrics.js';
 
 const getCrowdingLabel = (score) => {
@@ -39,7 +39,7 @@ const MOCK_EXPERIENCES = {
  * UI가 데이터를 읽는 유일한 진입점입니다.
  * 실제 데이터 연동 시 아래 mock import를 CSV/API 어댑터로 바꾸면 됩니다.
  */
-export function getNeighborhoods(provider = MockDataProvider) {
+export function getNeighborhoods(provider = RealDataProvider) {
   return provider.getMonthlySignals()
     .map(calculateNeighborhoodMetrics)
     .sort((a, b) => b.metrics.nextSpotScore - a.metrics.nextSpotScore)
@@ -47,7 +47,7 @@ export function getNeighborhoods(provider = MockDataProvider) {
       ...neighborhood,
       rank: index + 1,
       score: neighborhood.metrics.nextSpotScore,
-      confidenceLabel: '휴리스틱 mock 분석',
+      confidenceLabel: neighborhood.ajeongData ? '아정당 실데이터 기반 휴리스틱' : '개발용 mock 분석',
       signals: neighborhood.metrics.reasons,
       changeScore: Math.round(neighborhood.metrics.changeScore),
       crowdingScore: neighborhood.metrics.crowdingScore,
@@ -74,7 +74,7 @@ export function getNeighborhoods(provider = MockDataProvider) {
 }
 
 /** 상황별 후보 정렬. 실제 장소 추천·맛집 순위가 아닌 개발용 mock 경험 코스입니다. */
-export function getSituationRecommendations(situation, provider = MockDataProvider) {
+export function getSituationRecommendations(situation, provider = RealDataProvider) {
   return getNeighborhoods(provider)
     .filter((neighborhood) => neighborhood.experiences.situations.includes(situation))
     .sort((a, b) => {
@@ -85,6 +85,6 @@ export function getSituationRecommendations(situation, provider = MockDataProvid
     .slice(0, 3);
 }
 
-export function getDataSourceMeta(provider = MockDataProvider) {
+export function getDataSourceMeta(provider = RealDataProvider) {
   return provider.getMetadata();
 }
