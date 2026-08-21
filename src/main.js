@@ -53,6 +53,9 @@ app.innerHTML = `
   <footer>MAWD Challenge MVP · NEXT SPOT</footer>
   <dialog class="detail-dialog" id="detail-dialog" aria-labelledby="detail-title"><div class="dialog-content" id="detail-content"></div></dialog>`;
 
+const recommendationDisclaimer = document.querySelector('.recommendation-disclaimer');
+if (recommendationDisclaimer) recommendationDisclaimer.textContent = '추천 코스는 개발용 예시이며, 지역 점수는 아정당 집계 신호와 보조 지표를 함께 사용합니다.';
+
 document.querySelector('#candidate-grid').innerHTML = featuredNeighborhoods.map((neighborhood) => `
   <article class="candidate-card" data-neighborhood-id="${neighborhood.id}" tabindex="0" role="button" aria-label="${neighborhood.name} 상세 보기"><div class="card-topline"><span class="rank">TOP ${String(neighborhood.rank).padStart(2, '0')}</span><span class="crowding-badge ${neighborhood.crowdingLabel}">${neighborhood.crowdingLabel}</span></div><div class="card-title-row"><div><h3>${neighborhood.name}</h3><p class="district">${neighborhood.district}</p></div><div class="card-score"><small>NEXT SPOT</small><strong>${neighborhood.score}</strong></div></div><div class="change-line"><span>↑</span> ${getChangeLabel(neighborhood.changeScore)} <b>변화 ${neighborhood.changeScore}</b></div><p class="reason-title">왜 뜨는가?</p><ul class="signal-list">${neighborhood.signals.slice(0, 3).map((signal) => `<li>${signal}</li>`).join('')}</ul><div class="visit-meta"><span>현재 혼잡도 <b>${neighborhood.crowdingLabel}</b></span><span>추천 <b>${neighborhood.recommendedVisitTime}</b></span></div><span class="card-detail-link">상세 신호 보기 →</span></article>`).join('');
 
@@ -106,6 +109,10 @@ const openDetail = (id) => {
     <section class="detail-section external-data-section"><div class="detail-heading"><div><p class="eyebrow">SEOUL OPEN DATA</p><h3>서울시 통계로 확인한 외부 신호</h3></div><span class="source-chip">서울부동산정보광장</span></div><div class="external-data-grid"><article><span>민간 미분양</span><strong>${housing ? `${housing.privateUnsoldUnits}호` : '자료 없음'}</strong><small>기준일 ${housing?.referenceDate ?? '2026-06-30'}</small></article><article><span>상업·업무용 거래 활동</span><strong>${businessActivity !== undefined ? `${businessActivity}건` : '자료 없음'}</strong><small>${SEOUL_BUSINESS_SIGNAL_META.referencePeriod} · ${SEOUL_BUSINESS_SIGNAL_META.unit}</small></article></div><p class="evidence-copy">이 값은 지역 변화를 해석하기 위한 외부 참고 통계입니다. NEXT SPOT 점수를 단독으로 결정하지 않으며, 실제 미래 상권이나 거래량을 보장하지 않습니다.</p></section>
     <section class="visit-recommendation"><div><span>현재 혼잡도</span><strong>${neighborhood.crowdingLabel} · ${neighborhood.crowdingScore}/100</strong></div><div><span>추천 방문 시간</span><strong>${neighborhood.recommendedVisitTime}</strong></div><div><span>추천 이유</span><strong>${neighborhood.signals[0]}</strong></div></section>
     <p class="uncertainty-note">예측에는 불확실성이 있습니다. 아정당 신규 설치는 이사 수요의 보조 신호이며, 나머지 일부 지표와 코스는 개발용 데이터입니다.</p>`;
+  const sourceChip = detailContent.querySelector('.mock-chip');
+  if (sourceChip) sourceChip.textContent = neighborhood.ajeongData ? '아정당 설치 집계 · 보조 지표' : '개발용 보조 데이터';
+  const chartNote = detailContent.querySelector('.chart-note');
+  if (chartNote) chartNote.textContent = '신규 인터넷 설치는 아정당 최신 월간 집계 기반이며, 나머지 변화 신호는 보조 데이터입니다.';
   detailContent.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
   dialog.showModal();
 };
