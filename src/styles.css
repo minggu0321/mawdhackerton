@@ -9,3 +9,7 @@
 .external-data-grid span,.external-data-grid small{display:block;color:#6d786f;font-size:.68rem}
 .external-data-grid strong{display:block;margin:8px 0 4px;color:#28543a;font-size:1.35rem}
 @media(max-width:720px){.external-data-grid{grid-template-columns:1fr}}
+/* NEXT SPOT refined trust + warmth palette */
+:root{--ink:#24352d;--muted:#6d7b72;--line:#d8e4d4;--paper:#f7f8f3;--forest:#1f4d3a;--green:#8ead82;--lime:#e4efda;--orange:#d98a3a;--blue:#5e87a5;--lavender:#8876a8}
+.header-status{background:#fff;border-color:#d8e4d4;color:#5e7467}
+.header-status i{background:#5e87a5;box-shadow:0 0 0 3px #5e87a524}

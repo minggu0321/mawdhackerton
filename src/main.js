@@ -21,7 +21,7 @@ const getChangeLabel = (score) => (score >= 75 ? '변화 빠름' : score >= 60 ?
 app.innerHTML = `
   <header class="site-header">
     <a class="brand" href="#top" aria-label="NEXT SPOT 홈"><span class="brand-mark">N</span><span>NEXT SPOT</span></a>
-    <span class="header-status"><i></i>MVP · ${dataSource.label}</span>
+    <span class="header-status"><i></i>${dataSource.label} · 서울시 공개 통계 포함</span>
   </header>
   <main id="top">
     <section class="hero">
