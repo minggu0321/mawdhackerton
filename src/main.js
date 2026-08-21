@@ -80,6 +80,12 @@ const renderSituationRecommendations = () => {
   recommendationGrid.innerHTML = recommendations.length ? recommendations.map((neighborhood, index) => `
     <article class="recommendation-card" data-neighborhood-id="${neighborhood.id}" tabindex="0" role="button" aria-label="${neighborhood.name} 상세 보기"><div class="recommendation-top"><span>추천 ${index + 1}</span><span class="crowding-badge ${neighborhood.crowdingLabel}">${neighborhood.crowdingLabel}</span></div><div class="recommendation-name"><div><h3>${neighborhood.name}</h3><p>${neighborhood.district}</p></div><strong><small>NEXT SPOT</small>${neighborhood.score}</strong></div><p class="recommendation-reason">${neighborhood.signals[0]}</p><div class="course"><span>MOCK 산책 코스</span><ol>${neighborhood.experiences.course.map((place) => `<li>${place}</li>`).join('')}</ol></div><div class="recommendation-bottom"><span>현재 혼잡도 <b>${neighborhood.crowdingLabel}</b></span><span>${neighborhood.recommendedVisitTime}</span></div></article>`).join('')
   : `<div class="empty-state"><strong>아직 맞는 후보를 찾지 못했어요.</strong><p>다른 상황을 선택해 새로운 동네를 탐색해 보세요.</p></div>`;
+  recommendationGrid.querySelectorAll('.recommendation-card').forEach((card, index) => {
+    const budget = document.createElement('div');
+    budget.className = 'recommendation-budget';
+    budget.innerHTML = `<span>예상 하루 예산</span><b>${index === 0 ? '2만~4만원' : index === 1 ? '3만~5만원' : '1만~3만원'}</b><small>카페·식사·문화 코스 기준</small>`;
+    card.appendChild(budget);
+  });
   filterContainer.querySelectorAll('[data-situation]').forEach((button) => button.addEventListener('click', () => { activeSituation = button.dataset.situation; renderSituationRecommendations(); }));
   bindDetailTriggers();
 };
