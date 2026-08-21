@@ -70,7 +70,7 @@ document.querySelector('#candidate-grid').innerHTML = featuredNeighborhoods.map(
 
 document.querySelector('#seoul-map').innerHTML = neighborhoods.map((neighborhood) => {
   const position = mapPositions[neighborhood.id];
-  const featured = neighborhood.rank <= 5 ? 'featured' : '';
+  const featured = neighborhood.score >= 60 ? 'featured high-signal' : 'watch-signal';
   return `<button class="map-marker ${featured}" data-neighborhood-id="${neighborhood.id}" style="--x:${position.x}%; --y:${position.y}%" type="button" aria-label="${neighborhood.name}, NEXT SPOT ${neighborhood.score}"><span class="marker-pulse"></span><span class="marker-score">${neighborhood.score}</span><span class="marker-label">${neighborhood.name}<small>↑ ${neighborhood.changeScore}</small></span></button>`;
 }).join('');
 
