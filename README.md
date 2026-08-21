@@ -184,7 +184,9 @@ python -m http.server 8000
 ```
 
 ## 다음 핫플 지수 (MVP 휴리스틱)
-브라우저에서 [http://localhost:8000](http://localhost:8000)을 엽니다. 데이터 계산 검증은 `npm run check:data`로 실행합니다.
+로컬에서 직접 실행할 때만 [http://localhost:8000](http://localhost:8000)을 엽니다. 데이터 계산 검증은 `npm run check:data`로 실행합니다.
+
+제출용 공개 사이트: [NEXT SPOT GitHub Pages](https://minggu0321.github.io/mawdhackerton/)
 
 이 점수는 머신러닝 예측값이 아닙니다. 해커톤 MVP를 위한 **설명 가능한 고정 가중치 휴리스틱**입니다. 모든 입력 feature는 0~100 범위로 정규화한 뒤 계산합니다.
 ## Project structure
