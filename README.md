@@ -64,6 +64,17 @@ MAWD Challenge용 웹서비스 MVP입니다. **이미 유명한 핫플이 아니
 
 - HTML + CSS + JavaScript ES modules
 - 프레임워크·빌드 의존성 없음
+
+## 현재 MVP 화면
+
+- 왼쪽 추천 동네 리스트와 오른쪽 변화 신호 지도를 한 화면에서 탐색
+- 후보별 NEXT SPOT 점수, 변화 근거, 예상 예산, 혼잡도 표시
+- 지도 마커와 리스트 선택으로 상세 변화 패널 열기
+- 점수 높은 후보는 파란색 원, 관찰 후보는 흰색 원으로 구분
+- `CHANGE RADAR`를 통해 사람들이 몰리기 전의 지역 변화라는 서비스 정체성 전달
+- 모바일에서는 리스트 → 지도 → 상세 정보 순서로 반응형 표시
+
+추천 코스와 예산은 해커톤 MVP용 예시이며, 실제 장소 순위나 결제 금액을 의미하지 않습니다.
 > **사람들이 몰리기 전에, 다음 동네를 발견하세요.**
 
 ## 실행 방법
@@ -92,6 +103,12 @@ python -m http.server 8000
 NEXT SPOT은 “어디가 지금 유명한가?”가 아니라 **“어디에서 변화가 시작되고 있는가?”**를 봅니다.
 
 그다음 `http://localhost:8000`을 엽니다.
+
+## GitHub Pages 배포
+
+현재 저장소의 `main` 브랜치를 GitHub Pages로 배포합니다. 변경사항을 반영하려면 GitHub Desktop에서 `Commit to main` 후 `Push origin`을 실행합니다. 배포 주소는 다음과 같습니다.
+
+<https://minggu0321.github.io/mawdhackerton/>
 ## How it works
 
 ## 프로젝트 구조
