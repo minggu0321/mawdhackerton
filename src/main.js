@@ -30,7 +30,7 @@ app.innerHTML = `
       <p class="hero-copy">NEXT SPOT은 지역 변화 신호를 모아 앞으로 주목받을 가능성이 있는 동네를 보여주는 서비스입니다.</p>
       <div class="hero-stats"><span><b>10</b>개 관찰 동네</span><span><b>3</b>개 변화 축</span><span><b>0~100</b> 설명형 지수</span></div><div class="hero-signal-card"><div class="signal-orbit"><i></i><i></i><i></i><b>CHANGE<br/>RADAR</b></div><div><span class="hero-signal-live"><i></i> 지금 포착 중</span><strong>사람이 몰리기 전,<br/>지역의 작은 변화를 읽습니다.</strong><p>신규 설치 · 생활인구 · 상권 순증을 한 화면에서 확인하세요.</p></div></div>
     </section>
-    <section class="discovery-workspace" aria-labelledby="chat-title">
+    <section class="discovery-workspace" aria-labelledby="chat-title"><div class="workspace-toolbar"><div class="workspace-brand"><span>✦</span><b>SAVED</b></div><button type="button">↶ Undo</button><button type="button" disabled>↷ Redo</button><span class="toolbar-spacer"></span><button class="toolbar-share" type="button">↗ Share</button><button type="button">▦</button><button type="button">☷</button><button type="button">•••</button></div>
       <aside class="chat-panel">
         <div class="chat-panel-head"><div><p class="eyebrow">NEXT SPOT GUIDE</p><h2 id="chat-title">어떤 동네를 찾고 있나요?</h2></div><span class="chat-live"><i></i>LIVE</span></div>
         <div class="chat-history" id="chat-history" aria-live="polite"><div class="chat-message assistant"><span class="chat-avatar">N</span><p>원하는 분위기나 상황을 말해 주세요.<br /><b>“조용한 카페와 산책이 좋은 곳”</b>처럼 입력하면 변화 신호를 찾아볼게요.</p></div></div>
