@@ -56,6 +56,15 @@ app.innerHTML = `
 const recommendationDisclaimer = document.querySelector('.recommendation-disclaimer');
 if (recommendationDisclaimer) recommendationDisclaimer.textContent = '추천 코스는 개발용 예시이며, 지역 점수는 아정당 집계 신호와 보조 지표를 함께 사용합니다.';
 
+const guidePanel = document.querySelector('.chat-panel');
+if (guidePanel) {
+  const wanderList = document.createElement('section');
+  wanderList.className = 'wander-list';
+  wanderList.innerHTML = `<div class="wander-list-head"><span>오늘의 다음 동네</span><small>${featuredNeighborhoods.length}곳 탐색 중</small></div>${featuredNeighborhoods.slice(0, 4).map((n, i) => `<article class="wander-place" data-neighborhood-id="${n.id}" tabindex="0"><div class="wander-thumb thumb-${i}">${['CAFE','WALK','CULTURE','NEW'][i]}</div><div class="wander-place-copy"><b>${n.name}</b><span>${n.signals[0]}</span><small>${i === 0 ? '2만~4만원' : i === 1 ? '3만~5만원' : '1만~3만원'} · 혼잡도 ${n.crowdingLabel}</small></div><strong>${n.score}</strong></article>`).join('')}`;
+  guidePanel.appendChild(wanderList);
+  wanderList.querySelectorAll('[data-neighborhood-id]').forEach((el) => { el.addEventListener('click', () => openDetail(el.dataset.neighborhoodId)); el.addEventListener('keydown', (e) => { if (e.key === 'Enter') openDetail(el.dataset.neighborhoodId); }); });
+}
+
 document.querySelector('#candidate-grid').innerHTML = featuredNeighborhoods.map((neighborhood) => `
   <article class="candidate-card" data-neighborhood-id="${neighborhood.id}" tabindex="0" role="button" aria-label="${neighborhood.name} 상세 보기"><div class="card-topline"><span class="rank">TOP ${String(neighborhood.rank).padStart(2, '0')}</span><span class="crowding-badge ${neighborhood.crowdingLabel}">${neighborhood.crowdingLabel}</span></div><div class="card-title-row"><div><h3>${neighborhood.name}</h3><p class="district">${neighborhood.district}</p></div><div class="card-score"><small>NEXT SPOT</small><strong>${neighborhood.score}</strong></div></div><div class="change-line"><span>↑</span> ${getChangeLabel(neighborhood.changeScore)} <b>변화 ${neighborhood.changeScore}</b></div><p class="reason-title">왜 뜨는가?</p><ul class="signal-list">${neighborhood.signals.slice(0, 3).map((signal) => `<li>${signal}</li>`).join('')}</ul><div class="visit-meta"><span>현재 혼잡도 <b>${neighborhood.crowdingLabel}</b></span><span>추천 <b>${neighborhood.recommendedVisitTime}</b></span></div><span class="card-detail-link">상세 신호 보기 →</span></article>`).join('');
 
