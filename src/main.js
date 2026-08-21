@@ -37,7 +37,7 @@ app.innerHTML = `
         <form class="chat-form" id="chat-form"><input id="chat-input" autocomplete="off" placeholder="예: 주말에 조용한 데이트" aria-label="찾고 싶은 동네 입력" /><button type="submit" aria-label="검색">↑</button></form>
         <div class="prompt-chips"><button type="button">조용한 카페</button><button type="button">새로운 데이트</button><button type="button">산책하기 좋은 곳</button></div>
       </aside>
-      <div class="search-result-preview"><div class="search-state" id="search-state"><span class="search-dot"></span><span>키워드를 입력하면 변화 신호를 검색합니다</span></div><div class="mini-result-map" id="mini-result-map"><div class="mini-map-label">서울 변화 신호 지도</div></div><div class="search-result-list" id="search-result-list"><p>추천 결과가 여기에 표시됩니다.</p></div></div>
+      <div class="search-result-preview"><div class="search-state" id="search-state"><span class="search-dot"></span><span>키워드를 입력하면 변화 신호를 검색합니다</span></div><div class="mini-result-map" id="mini-result-map"><div class="mini-map-land"></div><div class="mini-map-label">서울 변화 신호 지도</div></div><div class="search-result-list" id="search-result-list"><p>추천 결과가 여기에 표시됩니다.</p></div></div>
     </section>
     <section class="map-section" aria-labelledby="map-title">
       <div class="section-heading"><div><p class="eyebrow">NEXT SPOT MAP</p><h2 id="map-title">서울의 변화 신호를 한눈에</h2></div><div class="map-legend"><span><i class="legend-dot high"></i>점수 높음</span><span><i class="legend-dot"></i>관찰 중</span></div></div>
@@ -133,7 +133,7 @@ const runKeywordSearch = (keyword) => {
     document.querySelector('.loading-message')?.remove();
     chatHistory.insertAdjacentHTML('beforeend', `<div class="chat-message assistant"><span class="chat-avatar">N</span><p><b>${results[0]?.name || '연남동'}</b>처럼 아직 과밀하지 않으면서 변화가 빠른 동네를 찾았어요.</p></div>`);
     searchState.classList.remove('is-searching'); searchState.innerHTML = '<span class="search-dot success"></span><span>검색 완료 · 변화 신호 기반 추천</span>';
-    miniMap.innerHTML = '<div class="mini-map-label">서울 변화 신호 지도</div>' + results.map((n, i) => `<button class="mini-marker" data-neighborhood-id="${n.id}" style="left:${25 + i * 25}%;top:${35 + (i % 2) * 23}%"><b>${n.score}</b><span>${n.name}</span></button>`).join('');
+    miniMap.innerHTML = '<div class="mini-map-land"></div><div class="mini-map-label">서울 변화 신호 지도</div>' + results.map((n, i) => `<button class="mini-marker" data-neighborhood-id="${n.id}" style="left:${25 + i * 25}%;top:${35 + (i % 2) * 23}%"><b>${n.score}</b><span>${n.name}</span></button>`).join('');
     searchResultList.innerHTML = results.map(n => `<article class="search-result" data-neighborhood-id="${n.id}"><div><b>${n.name}</b><span>${n.signals[0]}</span></div><strong>${n.score}<small>NEXT SPOT</small></strong></article>`).join('');
     bindDetailTriggers(); chatHistory.scrollTop = chatHistory.scrollHeight;
   }, 1100);
